@@ -13,13 +13,13 @@ import cloud.ptl.boardgamecollector.db.entity.Game;
 @Dao
 public interface GameDAO {
     @Insert
-    Game addAll(Game... games);
+    void addAll(Game... games);
 
     @Delete
     void delete(Game game);
 
     @Update
-    Game update(Game game);
+    void update(Game game);
 
     @Query("SELECT * FROM Game")
     List<Game> findAllGames();
