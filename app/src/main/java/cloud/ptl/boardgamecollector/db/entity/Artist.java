@@ -1,12 +1,12 @@
-package cloud.ptl.boardgamecollector.entity;
+package cloud.ptl.boardgamecollector.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Author {
+public class Artist {
     @PrimaryKey
-    public int authorId;
+    public int artistId;
 
     public String name;
     public String surname;

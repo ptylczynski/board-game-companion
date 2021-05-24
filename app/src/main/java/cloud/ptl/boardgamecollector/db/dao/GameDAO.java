@@ -1,4 +1,4 @@
-package cloud.ptl.boardgamecollector.dao;
+package cloud.ptl.boardgamecollector.db.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,7 +9,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import cloud.ptl.boardgamecollector.entity.Game;
+import cloud.ptl.boardgamecollector.db.entity.Game;
 
 @Dao
 public interface GameDAO {
