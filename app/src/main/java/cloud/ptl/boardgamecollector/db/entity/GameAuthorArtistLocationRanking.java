@@ -35,4 +35,11 @@ public class GameAuthorArtistLocationRanking {
             entityColumn = "gameLocatedId"
     )
     public Location location;
+
+    @Relation(
+            parentColumn = "gameId",
+            entityColumn = "addonId",
+            associateBy = @Junction(AddonGameCrossRef.class)
+    )
+    public List<Game> addons;
 }
