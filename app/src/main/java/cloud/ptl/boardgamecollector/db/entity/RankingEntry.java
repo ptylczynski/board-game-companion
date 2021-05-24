@@ -8,9 +8,9 @@ import java.time.LocalDate;
 @Entity
 public class RankingEntry {
     @PrimaryKey
-    public int rankingId;
+    public int rankingEntryId;
 
-    public LocalDate date;
+    public String date;
     public int position;
     public int gameId;
 }
