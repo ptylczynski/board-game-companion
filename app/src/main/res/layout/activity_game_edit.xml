@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/button2" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edit_game_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -48,10 +48,10 @@
                 android:text="Tytuł Orginalny"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_game_title" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/edit_orginal_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -69,10 +69,10 @@
                 android:text="Data Produkcji"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_orginal_title" />
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/edit_prod_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -89,10 +89,10 @@
                 android:text="Data Zamówienia"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_prod_date" />
 
             <EditText
-                android:id="@+id/editTextDate2"
+                android:id="@+id/edit_order_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -109,10 +109,10 @@
                 android:text="Data Dodania do Kolekcji"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_order_date" />
 
             <EditText
-                android:id="@+id/editTextDate3"
+                android:id="@+id/edit_addition_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -129,10 +129,10 @@
                 android:text="Opis"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextDate3" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_addition_date" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/edit_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -150,10 +150,10 @@
                 android:text="Cena zakupu"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_description" />
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/edit_buy_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -170,10 +170,10 @@
                 android:text="Sugerowana Cena Detaliczna"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_buy_price" />
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/edit_msrp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -190,10 +190,10 @@
                 android:text="Kod EAN"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_msrp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
+                android:id="@+id/edit_ean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -211,10 +211,10 @@
                 android:text="Kod produkcyjny"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_ean" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName6"
+                android:id="@+id/edit_manufacturer_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -232,10 +232,10 @@
                 android:text="Komentarz"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_manufacturer_code" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine3"
+                android:id="@+id/edit_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -247,24 +247,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/edit_standalone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Gra samodzielna"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_comment" />
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/edit_addon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Dodatek"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch1" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_standalone" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -274,10 +274,10 @@
                 android:text="Dodatek do"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch2" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_addon" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/edit_addon_to"
                 android:layout_width="419dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
