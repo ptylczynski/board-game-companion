@@ -1,8 +1,10 @@
-package cloud.ptl.boardgamecollector;
+package cloud.ptl.boardgamecollector.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import cloud.ptl.boardgamecollector.R;
 
 public class GameEntryView extends AppCompatActivity {
 

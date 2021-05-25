@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoardGameCollector">
-        <activity android:name=".GameAddActivity"></activity>
-        <activity android:name=".GameEntryView" />
+        <activity android:name=".activities.GameAddActivity"></activity>
+        <activity android:name=".activities.GameEntryView" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

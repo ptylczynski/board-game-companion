@@ -1,7 +1,6 @@
 package cloud.ptl.boardgamecollector;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import cloud.ptl.boardgamecollector.db.AppDB;
+import cloud.ptl.boardgamecollector.activities.GameAddActivity;
 import cloud.ptl.boardgamecollector.db.DB;
 
 public class MainActivity extends AppCompatActivity {
