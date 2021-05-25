@@ -15,7 +15,7 @@ public class Game {
 
     public String title;
     public String orginalTitle;
-    public Integer productionDate;
+    public String productionDate;
     public String description;
     public String orderDate;
     public String toCollectionAddDate;

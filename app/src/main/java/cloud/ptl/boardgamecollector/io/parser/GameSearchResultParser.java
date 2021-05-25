@@ -21,7 +21,7 @@ public class GameSearchResultParser extends AbstractParser<GameSearchResult> {
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(is, null);
-        while(parser.next() != XmlPullParser.END_TAG){
+        while(parser.next() != XmlPullParser.END_DOCUMENT){
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }

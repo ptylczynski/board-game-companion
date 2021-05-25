@@ -294,6 +294,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/Autor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Autor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_addon_to" />
+
+            <Spinner
+                android:id="@+id/edit_author"
+                android:layout_width="440dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/Autor"
+                tools:layout_editor_absoluteX="1dp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Artysta"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_author" />
+
+            <Spinner
+                android:id="@+id/edit_artist"
+                android:layout_width="440dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                tools:layout_editor_absoluteX="1dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
