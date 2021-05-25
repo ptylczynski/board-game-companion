@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import cloud.ptl.boardgamecollector.activities.GameAddActivity;
+import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.db.DB;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent runNew = new Intent(MainActivity.this, GameAddActivity.class);
+                Intent runNew = new Intent(MainActivity.this, GameEditActivity.class);
                 MainActivity.this.startActivity(runNew);
             }
         });

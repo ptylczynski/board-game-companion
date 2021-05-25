@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import cloud.ptl.boardgamecollector.R;
 
-public class GameAddActivity extends AppCompatActivity {
+public class GameEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_add);
+        setContentView(R.layout.activity_game_edit);
     }
 }
