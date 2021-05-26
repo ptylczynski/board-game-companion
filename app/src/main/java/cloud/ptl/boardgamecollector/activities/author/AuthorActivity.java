@@ -3,8 +3,6 @@ package cloud.ptl.boardgamecollector.activities.author;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +36,7 @@ public class AuthorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_author);
         this.add = this.findViewById(R.id.author_add);
         this.authorName = this.findViewById(R.id.author_name);
+        this.listView = this.findViewById(R.id.author_list);
         this.authors = new AuthorFetchAsyncTask().execute().get();
         this.authorString = this.authors.stream().map(el -> el.name + " " + el.surname).collect(Collectors.toList());
         this.adapter = new ArrayAdapter<>(this, R.layout.listitem, this.authorString);
@@ -61,15 +60,14 @@ public class AuthorActivity extends AppCompatActivity {
             EditText editText = findViewById(R.id.author_name);
             author.name = editText.getText().toString().split(" ")[0];
             author.surname = editText.getText().toString().split(" ")[1];
+            authorString.add(editText.getText().toString());
             try {
                 author.authorId = new AuthorAddAsyncTask().execute(author).get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
             authors.add(author);
-            authorString.add(editText.getText().toString());
+            editText.setText("");
         });
     }
 }

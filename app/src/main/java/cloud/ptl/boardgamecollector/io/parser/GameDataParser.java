@@ -13,7 +13,6 @@ import java.util.List;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
 import cloud.ptl.boardgamecollector.db.entity.Author;
 import cloud.ptl.boardgamecollector.db.entity.Game;
-import cloud.ptl.boardgamecollector.db.entity.GameAuthorArtistLocationRanking;
 import cloud.ptl.boardgamecollector.db.entity.Location;
 import cloud.ptl.boardgamecollector.io.dto.GameDetailsDTO;
 

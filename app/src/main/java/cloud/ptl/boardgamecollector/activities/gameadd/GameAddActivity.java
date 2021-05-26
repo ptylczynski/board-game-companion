@@ -45,6 +45,7 @@ public class GameAddActivity extends AppCompatActivity {
         this.listView.setOnItemClickListener((parent, view, position, id) -> {
             Intent run = new Intent(this, GameEditActivity.class);
             run.putExtra("id", this.ids.get(position));
+            run.putExtra("mode", "create");
             this.startActivity(run);
         });
         this.searchButton.setOnClickListener(v -> {

@@ -19,12 +19,16 @@ public class Game {
     public String description;
     public String orderDate;
     public String toCollectionAddDate;
-    public Double buyPrice;
-    public Double MSRP;
+    public String buyPrice;
+    public String MSRP;
     public String EAN;
-    public String BGGIdentifier;
+    public Integer BGGIdentifier;
     public String productionCode;
     public Boolean isStandalone;
     public Boolean isAddon;
     public String comment;
+
+    public Long authorId;
+    public Long artistId;
+    public Long locationId;
 }

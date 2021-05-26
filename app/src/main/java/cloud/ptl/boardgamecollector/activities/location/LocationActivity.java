@@ -37,7 +37,7 @@ public class LocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location);
         this.locations = new LocationFetchAsyncTask().execute().get();
         this.locationsString = this.locations.stream().map(el -> el.name).collect(Collectors.toList());
-        this.listView = this.findViewById(R.id.artist_list);
+        this.listView = this.findViewById(R.id.author_list);
         this.adapter = new ArrayAdapter<String>(this, R.layout.listitem, locationsString);
         this.listView.setAdapter(this.adapter);
 

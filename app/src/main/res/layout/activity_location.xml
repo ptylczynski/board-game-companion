@@ -7,7 +7,7 @@
     tools:context=".activities.location.LocationActivity">
 
     <ListView
-        android:id="@+id/artist_list"
+        android:id="@+id/author_list"
         android:layout_width="416dp"
         android:layout_height="0dp"
         android:layout_marginTop="150dp"

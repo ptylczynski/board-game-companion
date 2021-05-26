@@ -3,8 +3,6 @@ package cloud.ptl.boardgamecollector.activities.artist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +76,7 @@ public class ArtistActivity extends AppCompatActivity {
             }
             artists.add(artist);
             artistsString.add(editText.getText().toString());
+            editText.setText("");
         });
     }
 }

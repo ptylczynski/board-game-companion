@@ -267,7 +267,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_standalone" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/addonTo_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -282,7 +282,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/addonTo_textView" />
 
             <Button
                 android:id="@+id/edit_confirm"
@@ -341,7 +341,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_artist" />
 
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/edit_locaalization"
                 android:layout_width="420dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

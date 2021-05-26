@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase;
 
 import cloud.ptl.boardgamecollector.db.dao.ArtistDAO;
 import cloud.ptl.boardgamecollector.db.dao.AuthorDAO;
-import cloud.ptl.boardgamecollector.db.dao.GameAuthorArtistLocationRankingDAO;
 import cloud.ptl.boardgamecollector.db.dao.GameDAO;
 import cloud.ptl.boardgamecollector.db.dao.LocationDAO;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
@@ -31,7 +30,6 @@ import cloud.ptl.boardgamecollector.db.entity.RankingGameCrossRef;
         version = 1
 )
 public abstract class AppDB extends RoomDatabase {
-    public abstract GameAuthorArtistLocationRankingDAO gameAuthorArtistLocationRankingDAO();
     public abstract GameDAO gameDAO();
     public abstract LocationDAO locationDAO();
     public abstract AuthorDAO authorDAO();

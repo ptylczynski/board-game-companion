@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/artist_list"
+        android:id="@+id/author_list"
         android:layout_width="416dp"
         android:layout_height="0dp"
         android:layout_marginTop="150dp"
@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Nazwa"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dodaj"
-        app:layout_constraintBottom_toTopOf="@+id/artist_list"
+        app:layout_constraintBottom_toTopOf="@+id/author_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_name" />
