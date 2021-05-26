@@ -229,6 +229,32 @@
                 android:text="TextView"
                 android:textColor="#303030"
                 android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kod Produkcyjny" />
+
+            <TextView
+                android:id="@+id/description_productionCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#333333"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data Produkcji" />
+
+            <TextView
+                android:id="@+id/description_prod_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
         </LinearLayout>
     </ScrollView>
 

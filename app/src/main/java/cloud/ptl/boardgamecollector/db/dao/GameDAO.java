@@ -10,6 +10,8 @@ import java.util.List;
 
 import cloud.ptl.boardgamecollector.db.entity.Game;
 
+import static androidx.room.OnConflictStrategy.REPLACE;
+
 @Dao
 public interface GameDAO {
     @Insert
@@ -21,7 +23,7 @@ public interface GameDAO {
     @Delete
     void delete(Game game);
 
-    @Update
+    @Insert(onConflict = REPLACE)
     void update(Game game);
 
     @Query("SELECT * FROM Game")

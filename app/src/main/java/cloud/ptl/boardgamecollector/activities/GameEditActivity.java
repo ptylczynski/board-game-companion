@@ -150,6 +150,7 @@ public class GameEditActivity extends AppCompatActivity {
                     new GameDetailsFetchAsyncTask().execute(this.id.toString()).get();
         }
         else if(this.id > 0) {
+            this.gameDetailsDTO = new GameDetailsDTO();
             Game game = new GameFetchByIdAsyncTask().execute(this.id).get();
             Author author = new AuthorFetchByIdAsyncTask().execute(game.authorId).get();
             Artist artist = new ArtistFetchByIdAsyncTask().execute(game.artistId).get();
@@ -158,6 +159,7 @@ public class GameEditActivity extends AppCompatActivity {
             this.gameDetailsDTO.setAuthors(Collections.singletonList(author));
             this.gameDetailsDTO.setArtists(Collections.singletonList(artist));
             this.gameDetailsDTO.setLocation(location);
+            this.confirm.setText("Aktualizuj");
         }
 
         this.gameTitle.setText(this.gameDetailsDTO.getGame().title);
@@ -171,7 +173,45 @@ public class GameEditActivity extends AppCompatActivity {
         this.artist.setAdapter(this.artistsAdapter);
         this.location.setAdapter(this.locationsAdapter);
 
-        if (!this.authors.contains(this.gameDetailsDTO.getAuthors().get(0))) {
+        if (this.gameDetailsDTO.getGame().buyPrice != null)
+            this.buyPrice.setText(
+                    this.gameDetailsDTO.getGame().buyPrice
+            );
+
+        if (this.gameDetailsDTO.getGame().MSRP != null)
+            this.msrp.setText(
+                    this.gameDetailsDTO.getGame().MSRP
+            );
+
+        if (this.gameDetailsDTO.getGame().productionCode != null)
+            this.manufacturerCode.setText(
+                    this.gameDetailsDTO.getGame().productionCode
+            );
+
+        if (this.gameDetailsDTO.getGame().comment != null)
+            this.comment.setText(
+                    this.gameDetailsDTO.getGame().comment
+            );
+
+        if (this.gameDetailsDTO.getGame().orderDate != null)
+            this.orderDate.setText(
+                    this.gameDetailsDTO.getGame().orderDate
+            );
+
+        if (this.gameDetailsDTO.getGame().toCollectionAddDate != null)
+            this.additionDate.setText(
+                    this.gameDetailsDTO.getGame().toCollectionAddDate
+            );
+
+        if (this.gameDetailsDTO.getGame().EAN != null)
+            this.ean.setText(
+                    this.gameDetailsDTO.getGame().EAN
+            );
+
+        if (this.authors.stream().noneMatch(el ->
+                el.name.equals(this.gameDetailsDTO.getAuthors().get(0).name) &&
+                        el.surname.equals(this.gameDetailsDTO.getAuthors().get(0).surname))
+        ) {
             this.authorsAdapter.add(
                     this.gameDetailsDTO.getAuthors().get(0).name + " " +
                     this.gameDetailsDTO.getAuthors().get(0).surname
@@ -184,7 +224,10 @@ public class GameEditActivity extends AppCompatActivity {
             );
         }
 
-        if (!this.artists.contains(this.gameDetailsDTO.getArtists().get(0))){
+        if (this.artists.stream().noneMatch(el ->
+                el.name.equals(this.gameDetailsDTO.getArtists().get(0).name) &&
+                el.surname.equals(this.gameDetailsDTO.getArtists().get(0).surname))
+        ) {
             this.artistsAdapter.add(
                     this.gameDetailsDTO.getArtists().get(0).name + " " +
                             this.gameDetailsDTO.getArtists().get(0).surname
@@ -218,26 +261,39 @@ public class GameEditActivity extends AppCompatActivity {
         });
 
         this.confirm.setOnClickListener(v -> {
-
-            if (!this.artists.contains(this.gameDetailsDTO.getArtists().get(0))){
+            if (this.artists.stream()
+                    .noneMatch(el -> (el.name + " " + el.surname)
+                            .equals(this.artistsSring.get(this.artist.getSelectedItemPosition()))
+                    )
+            ) {
                 try {
-                    this.gameDetailsDTO.getArtists().get(0).artistId =
+                    Artist nArtist = new Artist();
+                    nArtist.name = this.artistsSring.get(this.artist.getSelectedItemPosition()).split(" ")[0];
+                    nArtist.surname = this.artistsSring.get(this.artist.getSelectedItemPosition()).split(" ")[1];
+                    nArtist.artistId =
                             new ArtistAddAsyncTask().execute(
-                                    this.gameDetailsDTO.getArtists().get(0)
+                                    nArtist
                             ).get();
-                    this.artists.add(this.gameDetailsDTO.getArtists().get(0));
+                    this.artists.add(nArtist);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            if (!this.authors.contains(this.gameDetailsDTO.getAuthors().get(0))) {
+            if (this.authors.stream()
+                    .noneMatch(el -> (el.name + " " + el.surname)
+                            .equals(this.authorsString.get(this.author.getSelectedItemPosition()))
+                    )
+            ) {
                 try {
-                    this.gameDetailsDTO.getAuthors().get(0).authorId =
+                    Author nAuthor = new Author();
+                    nAuthor.name = this.authorsString.get(this.author.getSelectedItemPosition()).split(" ")[0];
+                    nAuthor.surname = this.authorsString.get(this.author.getSelectedItemPosition()).split(" ")[1];
+                    nAuthor.authorId =
                             new AuthorAddAsyncTask().execute(
-                                    this.gameDetailsDTO.getAuthors().get(0)
+                                    nAuthor
                             ).get();
-                    this.authors.add(this.gameDetailsDTO.getAuthors().get(0));
+                    this.authors.add(nAuthor);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -258,6 +314,7 @@ public class GameEditActivity extends AppCompatActivity {
             game.toCollectionAddDate = this.additionDate.getText().toString();
             game.orderDate = this.orderDate.getText().toString();
             game.description = this.description.getText().toString();
+            game.productionCode = this.manufacturerCode.getText().toString();
             game.imageURL = this.gameDetailsDTO.getGame().imageURL;
             game.authorId = this.authors.get(
                     this.author.getSelectedItemPosition()
@@ -268,31 +325,33 @@ public class GameEditActivity extends AppCompatActivity {
             game.locationId = this.locations.get(
                     this.location.getSelectedItemPosition()
             ).locationId;
-            if (this.games.stream().anyMatch(el -> el.title.equals(game.title))){
-                Snackbar.make(
-                        this.findViewById(R.id.edit_confirm),
-                        "Gra już istnieje, nie dodano",
-                        Snackbar.LENGTH_SHORT
-                ).show();
-            }
-            else {
-                if (this.mode.equals("create")) {
+
+            if (this.mode.equals("create")){
+                if (this.games.stream().anyMatch(el -> el.title.equals(game.title))){
+                    Snackbar.make(
+                            this.findViewById(R.id.edit_confirm),
+                            "Gra już istnieje, nie dodano",
+                            Snackbar.LENGTH_SHORT
+                    ).show();
+                }
+                else {
                     try {
                         new GameAddAsyncTask().execute(game).get();
                     } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                else {
-                    try {
-                        new GameUpdateAsyncTask().execute(game).get();
-                    } catch (ExecutionException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Intent intent = new Intent(this, MainActivity.class);
-                this.startActivity(intent);
             }
+            else {
+                try {
+                    game.gameId = this.gameDetailsDTO.getGame().gameId;
+                    new GameUpdateAsyncTask().execute(game).get();
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            Intent intent = new Intent(this, MainActivity.class);
+            this.startActivity(intent);
         });
     }
 }
