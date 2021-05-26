@@ -67,7 +67,7 @@ public class LocationActivity extends AppCompatActivity {
             }
             adapter.add(location.name);
             locations.add(location);
-            ((TextView) findViewById(R.id.location_new_name)).setText("");2
+            ((TextView) findViewById(R.id.location_new_name)).setText("");
         });
     }
 }
