@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Game {
     @PrimaryKey(autoGenerate = true)
-    public int gameId;
+    public Long gameId;
 
     public String title;
     public String orginalTitle;

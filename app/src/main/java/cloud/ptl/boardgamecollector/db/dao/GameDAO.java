@@ -28,5 +28,5 @@ public interface GameDAO {
     List<Game> findAllGames();
 
     @Query("SELECT * FROM Game WHERE gameId=:id")
-    Game findById(int id);
+    Game findById(Long id);
 }
