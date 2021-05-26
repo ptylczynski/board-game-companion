@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoardGameCollector">
-        <activity android:name=".activities.artist.ArtistActivity"></activity>
+        <activity android:name=".activities.gamedetails.GameDetailsActivity"></activity>
+        <activity android:name=".activities.artist.ArtistActivity" />
         <activity android:name=".activities.author.AuthorActivity" />
         <activity android:name=".activities.location.LocationActivity" />
         <activity android:name=".activities.gameadd.GameAddRowActivity" />
