@@ -27,6 +27,7 @@ public class GameDataParser extends AbstractParser<GameDetailsDTO> {
 
         game.isAddon = false;
         game.isStandalone = false;
+        game.description = "";
 
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -38,32 +39,38 @@ public class GameDataParser extends AbstractParser<GameDetailsDTO> {
             String name = parser.getName();
             if (name.equals("name")) {
                 if (parser.getAttributeValue(null, "type").equals("primary")) {
-                    game.title = parser.getAttributeValue(null, "type");
-                    game.orginalTitle = parser.getAttributeValue(null, "type");
+                    game.title = parser.getAttributeValue(null, "value");
+                    game.orginalTitle = parser.getAttributeValue(null, "value");
                 }
             }
             if (name.equals("description")) {
-                game.description = parser.getText();
+                if (parser.next() == XmlPullParser.TEXT)
+                    game.description = parser.getText();
             }
             if (name.equals("yearpublished")) {
-                game.productionDate = parser.getText();
+                game.productionDate = parser.getAttributeValue(null, "value");
             }
             if (name.equals("link")) {
                 if (parser.getAttributeValue(null, "type").equals("boardgameartist")) {
                     Artist artist = new Artist();
-                    artist.name = parser.getAttributeValue(null, "boardgameartist").split(" ")[0];
-                    artist.surname = parser.getAttributeValue(null, "boardgameartist").split(" ")[1];
+                    artist.name = parser.getAttributeValue(null, "value").split(" ")[0];
+                    artist.surname = parser.getAttributeValue(null, "value").split(" ")[1];
                     artists.add(artist);
                 }
                 if (parser.getAttributeValue(null, "type").equals("boardgamedesigner")) {
                     Author author = new Author();
-                    author.name = parser.getAttributeValue(null, "boardgamedesigner").split(" ")[0];
-                    author.surname = parser.getAttributeValue(null, "boardgamedesigner").split(" ")[1];
+                    author.name = parser.getAttributeValue(null, "value").split(" ")[0];
+                    author.surname = parser.getAttributeValue(null, "value").split(" ")[1];
                     authors.add(author);
                 }
                 if (parser.getAttributeValue(null, "type").equals("boardgameexpansion")){
-                    if (parser.getAttributeValue(null, "inbound").equals("true")) {
-                        game.isAddon = true;
+                    try {
+                        if (parser.getAttributeValue(null, "inbound").equals("true")) {
+                            game.isAddon = true;
+                        }
+                    }
+                    catch (NullPointerException ex){
+                        ex.printStackTrace();
                     }
                 }
             }

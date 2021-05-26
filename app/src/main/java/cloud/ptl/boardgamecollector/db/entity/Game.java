@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 public class Game {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int gameId;
 
     public String title;

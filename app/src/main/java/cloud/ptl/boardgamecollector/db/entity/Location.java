@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Location {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int locationId;
     public int gameLocatedId;
 
