@@ -23,4 +23,7 @@ public interface ArtistDAO {
 
     @Query("SELECT * FROM Artist")
     List<Artist> getAll();
+
+    @Query("SELECT * FROM Artist WHERE artistId=:id")
+    Artist findById(Long id);
 }

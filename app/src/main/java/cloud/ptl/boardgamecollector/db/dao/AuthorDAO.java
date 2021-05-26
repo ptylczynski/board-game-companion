@@ -23,4 +23,7 @@ public interface AuthorDAO {
 
     @Query("SELECT * FROM Author")
     List<Author> getAll();
+
+    @Query("SELECT * FROM Author WHERE authorId=:id")
+    Author findById(Long id);
 }
