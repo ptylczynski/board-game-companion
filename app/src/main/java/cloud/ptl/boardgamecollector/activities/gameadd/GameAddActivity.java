@@ -25,7 +25,7 @@ public class GameAddActivity extends AppCompatActivity {
 
     private ListView listView;
     private List<String> titles;
-    private List<Integer> ids;
+    private List<Long> ids;
     private Button searchButton;
     private ArrayAdapter<String> adapter;
 

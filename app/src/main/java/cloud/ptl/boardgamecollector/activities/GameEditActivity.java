@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -29,12 +31,16 @@ import cloud.ptl.boardgamecollector.db.entity.Game;
 import cloud.ptl.boardgamecollector.db.entity.Location;
 import cloud.ptl.boardgamecollector.io.db.ArtistAddAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.ArtistFetchAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.ArtistFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.AuthorAddAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.AuthorFetchAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.AuthorFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameAddAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameFetchAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.GameFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameUpdateAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.LocationFetchAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.LocationFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.dto.GameDetailsDTO;
 import cloud.ptl.boardgamecollector.io.network.GameDetailsFetchAsyncTask;
 import lombok.SneakyThrows;
@@ -75,7 +81,7 @@ public class GameEditActivity extends AppCompatActivity {
     private List<Game> games;
 
     private Intent intent;
-    private Integer id;
+    private Long id;
 
     private GameDetailsDTO gameDetailsDTO;
 
@@ -137,18 +143,29 @@ public class GameEditActivity extends AppCompatActivity {
         this.authorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         this.intent = this.getIntent();
-        this.id = this.intent.getIntExtra("id", UUID.randomUUID().hashCode());
+        this.id = this.intent.getLongExtra("id", UUID.randomUUID().hashCode());
         this.mode = this.intent.getStringExtra("mode");
-        if (this.id > 0) {
+        if (this.id > 0 && this.mode.equals("create")) {
             this.gameDetailsDTO =
                     new GameDetailsFetchAsyncTask().execute(this.id.toString()).get();
-            this.gameTitle.setText(this.gameDetailsDTO.getGame().title);
-            this.orginalTitle.setText(this.gameDetailsDTO.getGame().orginalTitle);
-            this.prodDate.setText(this.gameDetailsDTO.getGame().productionDate);
-            this.addon.setChecked(this.gameDetailsDTO.getGame().isAddon);
-            this.standalone.setChecked(this.gameDetailsDTO.getGame().isStandalone);
-            this.description.setText(this.gameDetailsDTO.getGame().description);
         }
+        else if(this.id > 0) {
+            Game game = new GameFetchByIdAsyncTask().execute(this.id).get();
+            Author author = new AuthorFetchByIdAsyncTask().execute(game.authorId).get();
+            Artist artist = new ArtistFetchByIdAsyncTask().execute(game.artistId).get();
+            Location location = new LocationFetchByIdAsyncTask().execute(game.locationId).get();
+            this.gameDetailsDTO.setGame(game);
+            this.gameDetailsDTO.setAuthors(Collections.singletonList(author));
+            this.gameDetailsDTO.setArtists(Collections.singletonList(artist));
+            this.gameDetailsDTO.setLocation(location);
+        }
+
+        this.gameTitle.setText(this.gameDetailsDTO.getGame().title);
+        this.orginalTitle.setText(this.gameDetailsDTO.getGame().orginalTitle);
+        this.prodDate.setText(this.gameDetailsDTO.getGame().productionDate);
+        this.addon.setChecked(this.gameDetailsDTO.getGame().isAddon);
+        this.standalone.setChecked(this.gameDetailsDTO.getGame().isStandalone);
+        this.description.setText(this.gameDetailsDTO.getGame().description);
 
         this.author.setAdapter(this.authorsAdapter);
         this.artist.setAdapter(this.artistsAdapter);
@@ -233,7 +250,7 @@ public class GameEditActivity extends AppCompatActivity {
             game.isStandalone = this.standalone.isChecked();
             game.isAddon = this.addon.isChecked();
             game.productionDate = this.prodDate.getText().toString();
-            game.BGGIdentifier = id;
+            game.BGGIdentifier = Math.toIntExact(id);
             game.buyPrice = this.buyPrice.getText().toString();
             game.comment = this.comment.getText().toString();
             game.EAN = this.ean.getText().toString();

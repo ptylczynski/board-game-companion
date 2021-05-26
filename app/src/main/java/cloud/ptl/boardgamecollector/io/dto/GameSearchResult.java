@@ -9,5 +9,5 @@ import lombok.EqualsAndHashCode;
 @Data
 public class GameSearchResult extends AbstractDTO{
     private List<String> gameNames;
-    private List<Integer> ids;
+    private List<Long> ids;
 }

@@ -30,7 +30,7 @@ public class GameSearchResultParser extends AbstractParser<GameSearchResult> {
                 gameSearchResult.getGameNames().add(parser.getAttributeValue(null, "value"));
             if (name.equals("item"))
                 gameSearchResult.getIds().add(
-                        Integer.valueOf(
+                        Long.valueOf(
                                 parser.getAttributeValue(null, "id")
                         )
                 );

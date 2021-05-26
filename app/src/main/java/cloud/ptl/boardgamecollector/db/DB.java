@@ -11,7 +11,7 @@ public class DB {
         DB.db = Room.databaseBuilder(
                context,
                AppDB.class,
-               "BoardGameCollectorDB4"
+               "BoardGameCollectorDB5"
         ).build();
     }
 }
