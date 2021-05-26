@@ -19,7 +19,8 @@ public class UserGamesParser extends AbstractParser<UserGamesDTO> {
     @Override
     public UserGamesDTO parse(InputStream is) throws XmlPullParserException, IOException {
         UserGamesDTO userGamesDTO = new UserGamesDTO();
-        userGamesDTO.setGames(new ArrayList<>());
+        userGamesDTO.setGamesID(new ArrayList<>());
+        userGamesDTO.setNames(new ArrayList<>());
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(is, null);
@@ -31,10 +32,12 @@ public class UserGamesParser extends AbstractParser<UserGamesDTO> {
             if (name.equals("item"))
                 if(parser.getAttributeValue(null, "subtype").equals("boardgame")){
                     Long id = Long.valueOf(parser.getAttributeValue(null, "objectid"));
-                    GameDetailsDTO gameDetailsDTO =
-                            new GameDetailsFetchAsyncTask().execute(id.toString()).get();
-                    userGamesDTO.getGames().add(gameDetailsDTO);
+                    userGamesDTO.getGamesID().add(id);
                 }
+            if (name.equals("name")){
+                if (parser.next() == XmlPullParser.TEXT)
+                    userGamesDTO.getNames().add(parser.getText());
+            }
         }
         return userGamesDTO;
     }

@@ -8,5 +8,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserGamesDTO extends AbstractDTO{
-    List<GameDetailsDTO> games;
+    List<Long> gamesID;
+    List<String> names;
 }

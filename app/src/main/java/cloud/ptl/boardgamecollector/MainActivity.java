@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.activities.artist.ArtistActivity;
 import cloud.ptl.boardgamecollector.activities.author.AuthorActivity;
+import cloud.ptl.boardgamecollector.activities.copycollection.CopyActivity;
 import cloud.ptl.boardgamecollector.activities.gameadd.GameAddActivity;
 import cloud.ptl.boardgamecollector.activities.gamedetails.GameDetailsActivity;
 import cloud.ptl.boardgamecollector.activities.location.LocationActivity;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton locationAddFly;
     private FloatingActionButton authorFloat;
     private FloatingActionButton artistFloat;
+    private FloatingActionButton copyCollection;
     private ListView gameList;
 
     private List<Game> games;
@@ -61,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         this.locationAddFly = this.findViewById(R.id.location_add_fly);
         this.authorFloat = this.findViewById(R.id.author_float);
         this.artistFloat = this.findViewById(R.id.artist_float);
+        this.copyCollection = this.findViewById(R.id.copy_game_list);
+
+        this.copyCollection.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CopyActivity.class);
+            this.startActivity(intent);
+        });
 
         this.floatingActionButton.setOnClickListener(v -> {
             Intent runNew = new Intent(MainActivity.this, GameAddActivity.class);

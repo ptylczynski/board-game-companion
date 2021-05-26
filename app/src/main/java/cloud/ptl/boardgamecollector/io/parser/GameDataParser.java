@@ -59,7 +59,12 @@ public class GameDataParser extends AbstractParser<GameDetailsDTO> {
                 if (parser.getAttributeValue(null, "type").equals("boardgamedesigner")) {
                     Author author = new Author();
                     author.name = parser.getAttributeValue(null, "value").split(" ")[0];
-                    author.surname = parser.getAttributeValue(null, "value").split(" ")[1];
+                    try {
+                        author.surname = parser.getAttributeValue(null, "value").split(" ")[1];
+                    }
+                    catch (IndexOutOfBoundsException ex){
+                        author.surname = "";
+                    }
                     authors.add(author);
                 }
                 if (parser.getAttributeValue(null, "type").equals("boardgameexpansion")){
