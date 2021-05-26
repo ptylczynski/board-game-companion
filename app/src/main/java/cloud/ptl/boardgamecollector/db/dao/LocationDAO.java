@@ -3,7 +3,10 @@ package cloud.ptl.boardgamecollector.db.dao;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
+
+import java.util.List;
 
 import cloud.ptl.boardgamecollector.db.entity.Location;
 
@@ -17,4 +20,7 @@ public interface LocationDAO {
 
     @Update
     void update(Location location);
+
+    @Query("SELECT * FROM Location")
+    List<Location> getAll();
 }
