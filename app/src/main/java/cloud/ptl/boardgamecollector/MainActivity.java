@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.activities.artist.ArtistActivity;
@@ -21,6 +23,7 @@ import cloud.ptl.boardgamecollector.activities.main.GameAdapter;
 import cloud.ptl.boardgamecollector.db.DB;
 import cloud.ptl.boardgamecollector.db.dao.GameDAO;
 import cloud.ptl.boardgamecollector.db.entity.Game;
+import cloud.ptl.boardgamecollector.io.db.GameDeleteAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameFetchAsyncTask;
 import lombok.SneakyThrows;
 
@@ -78,7 +81,21 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(runNew);
         });
 
+        this.gameList.setOnItemLongClickListener((parent, view, position, id) -> {
+            Game game = this.games.get(position);
+            this.games.remove(position);
+            this.adapter.remove(game);
+            try {
+                new GameDeleteAsyncTask().execute(game).get();
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        });
 
+        this.gameList.setOnItemClickListener((parent, view, position, id) -> {
+
+        });
     }
 
     @SneakyThrows

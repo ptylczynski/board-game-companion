@@ -5,7 +5,8 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.GameEntryView" >
+    tools:context=".activities.GameEntryView"
+    android:longClickable="true">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

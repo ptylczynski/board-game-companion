@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import cloud.ptl.boardgamecollector.MainActivity;
 import cloud.ptl.boardgamecollector.R;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
 import cloud.ptl.boardgamecollector.db.entity.Author;
@@ -258,10 +259,22 @@ public class GameEditActivity extends AppCompatActivity {
                 ).show();
             }
             else {
-                if (this.mode.equals("create"))
-                    new GameAddAsyncTask().execute(game);
-                else
-                    new GameUpdateAsyncTask().execute(game);
+                if (this.mode.equals("create")) {
+                    try {
+                        new GameAddAsyncTask().execute(game).get();
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    try {
+                        new GameUpdateAsyncTask().execute(game).get();
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Intent intent = new Intent(this, MainActivity.class);
+                this.startActivity(intent);
             }
         });
     }
