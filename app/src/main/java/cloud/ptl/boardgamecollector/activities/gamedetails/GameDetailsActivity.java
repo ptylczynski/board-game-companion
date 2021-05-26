@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import cloud.ptl.boardgamecollector.R;
 import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
@@ -38,7 +40,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView artist;
     private TextView localization;
 
-    private Button edit;
+    private FloatingActionButton edit;
 
     private Long id;
     private Game game;

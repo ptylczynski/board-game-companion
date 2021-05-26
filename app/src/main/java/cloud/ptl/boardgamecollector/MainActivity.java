@@ -18,6 +18,7 @@ import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.activities.artist.ArtistActivity;
 import cloud.ptl.boardgamecollector.activities.author.AuthorActivity;
 import cloud.ptl.boardgamecollector.activities.gameadd.GameAddActivity;
+import cloud.ptl.boardgamecollector.activities.gamedetails.GameDetailsActivity;
 import cloud.ptl.boardgamecollector.activities.location.LocationActivity;
 import cloud.ptl.boardgamecollector.activities.main.GameAdapter;
 import cloud.ptl.boardgamecollector.db.DB;
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             MainActivity.this.startActivity(runNew);
         });
 
+        this.gameList.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(this, GameDetailsActivity.class);
+            intent.putExtra("id", games.get(position).gameId);
+            startActivity(intent);
+        });
+
         this.gameList.setOnItemLongClickListener((parent, view, position, id) -> {
             Game game = this.games.get(position);
             this.games.remove(position);
@@ -90,11 +97,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-            return true;
-        });
-
-        this.gameList.setOnItemClickListener((parent, view, position, id) -> {
-
+            return false;
         });
     }
 
