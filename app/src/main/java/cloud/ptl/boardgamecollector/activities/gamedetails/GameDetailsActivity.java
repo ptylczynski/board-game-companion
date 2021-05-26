@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import cloud.ptl.boardgamecollector.R;
+import cloud.ptl.boardgamecollector.db.entity.Artist;
+import cloud.ptl.boardgamecollector.db.entity.Author;
+import cloud.ptl.boardgamecollector.db.entity.Game;
+import cloud.ptl.boardgamecollector.db.entity.Location;
 
 public class GameDetailsActivity extends AppCompatActivity {
 
@@ -26,6 +30,10 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView localization;
 
     private Long id;
+    private Game game;
+    private Location location;
+    private Artist artistEntity;
+    private Author authorEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +57,5 @@ public class GameDetailsActivity extends AppCompatActivity {
 
         Intent intent = this.getIntent();
         this.id = intent.getLongExtra("id", -1);
-
-
     }
 }
