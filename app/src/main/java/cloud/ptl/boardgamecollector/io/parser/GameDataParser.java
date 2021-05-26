@@ -73,6 +73,10 @@ public class GameDataParser extends AbstractParser<GameDetailsDTO> {
                     }
                 }
             }
+            if (name.equals("image")) {
+                if (parser.next() == XmlPullParser.TEXT)
+                    game.imageURL = parser.getText().toString();
+            }
 
 
         }
