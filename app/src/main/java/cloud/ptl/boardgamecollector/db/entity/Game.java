@@ -32,4 +32,5 @@ public class Game {
     public Long authorId;
     public Long artistId;
     public Long locationId;
+    public Long addonToId;
 }

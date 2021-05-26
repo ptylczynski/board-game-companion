@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import cloud.ptl.boardgamecollector.R;
 import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
@@ -41,6 +43,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView localization;
     private TextView productionCode;
     private TextView productionDate;
+    private TextView addons;
 
     private FloatingActionButton edit;
 
@@ -49,6 +52,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private Location location;
     private Artist artistEntity;
     private Author authorEntity;
+    private List<Game> addonsEntities;
 
     @SuppressLint("SetTextI18n")
     @SneakyThrows
@@ -73,6 +77,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.localization = this.findViewById(R.id.description_localization);
         this.productionCode = this.findViewById(R.id.description_productionCode);
         this.productionDate = this.findViewById(R.id.description_prod_date);
+        this.addons = this.findViewById(R.id.description_addons);
 
         this.edit = this.findViewById(R.id.description_edit);
 
@@ -108,6 +113,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.localization.setText(this.location.name);
         this.productionCode.setText(this.game.productionCode);
         this.productionDate.setText(this.game.productionDate);
+        this.addons.setText();
 
         this.edit.setOnClickListener(v -> {
             Intent intent1 = new Intent(GameDetailsActivity.this, GameEditActivity.class);

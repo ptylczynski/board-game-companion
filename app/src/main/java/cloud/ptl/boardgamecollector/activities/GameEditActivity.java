@@ -78,6 +78,8 @@ public class GameEditActivity extends AppCompatActivity {
     private List<String> locationsString;
     private ArrayAdapter<String> locationsAdapter;
 
+    private ArrayAdapter<String> addonAdapter;
+
     private List<Game> games;
 
     private Intent intent;
@@ -141,6 +143,13 @@ public class GameEditActivity extends AppCompatActivity {
                 this.authorsString
         );
         this.authorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.addonAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                this.games.stream().map(el -> el.title).collect(Collectors.toList())
+        );
+        this.addonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.addonTo.setAdapter(this.addonAdapter);
 
         this.intent = this.getIntent();
         this.id = this.intent.getLongExtra("id", UUID.randomUUID().hashCode());
@@ -325,6 +334,9 @@ public class GameEditActivity extends AppCompatActivity {
             game.locationId = this.locations.get(
                     this.location.getSelectedItemPosition()
             ).locationId;
+            game.addonToId = this.games.get(
+                    this.addonTo.getSelectedItemPosition()
+            ).gameId;
 
             if (this.mode.equals("create")){
                 if (this.games.stream().anyMatch(el -> el.title.equals(game.title))){

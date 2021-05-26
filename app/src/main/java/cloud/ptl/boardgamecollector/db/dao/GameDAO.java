@@ -31,4 +31,7 @@ public interface GameDAO {
 
     @Query("SELECT * FROM Game WHERE gameId=:id")
     Game findById(Long id);
+
+    @Query("SELECT * FROM Game WHERE addonToId=:id")
+    List<Game> findAllAddons(Long id);
 }
