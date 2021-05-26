@@ -27,6 +27,7 @@ public class Game {
     public Boolean isStandalone;
     public Boolean isAddon;
     public String comment;
+    public String imageURL;
 
     public Long authorId;
     public Long artistId;
