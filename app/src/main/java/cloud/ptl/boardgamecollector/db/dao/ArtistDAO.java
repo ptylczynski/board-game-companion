@@ -8,7 +8,7 @@ import androidx.room.Update;
 import cloud.ptl.boardgamecollector.db.entity.Artist;
 
 @Dao
-public class ArtistDAO {
+public interface ArtistDAO {
     @Insert
     long add(Artist artist);
 

@@ -5,16 +5,14 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 
-import cloud.ptl.boardgamecollector.db.entity.Author;
-
 @Dao
-public interface AuthorDAO {
+public class LocationDAO {
     @Insert
-    long add(Author author);
+    long add(Location location);
 
     @Delete
-    void delete(Author author);
+    void delete(Location location);
 
     @Update
-    void update(Author author);
+    void update(Location location);
 }
