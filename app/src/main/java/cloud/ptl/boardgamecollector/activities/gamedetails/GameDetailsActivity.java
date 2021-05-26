@@ -1,17 +1,22 @@
 package cloud.ptl.boardgamecollector.activities.gamedetails;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import cloud.ptl.boardgamecollector.R;
 import cloud.ptl.boardgamecollector.activities.GameEditActivity;
@@ -21,8 +26,10 @@ import cloud.ptl.boardgamecollector.db.entity.Game;
 import cloud.ptl.boardgamecollector.db.entity.Location;
 import cloud.ptl.boardgamecollector.io.db.ArtistFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.AuthorFetchByIdAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.GameFetchAddonsAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameFetchByIdAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.LocationFetchByIdAsyncTask;
+import cloud.ptl.boardgamecollector.io.image.DownloadImageTask;
 import lombok.SneakyThrows;
 
 public class GameDetailsActivity extends AppCompatActivity {
@@ -44,6 +51,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView productionCode;
     private TextView productionDate;
     private TextView addons;
+    private ImageView imageView;
 
     private FloatingActionButton edit;
 
@@ -54,6 +62,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private Author authorEntity;
     private List<Game> addonsEntities;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     @SneakyThrows
     @Override
@@ -78,6 +87,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.productionCode = this.findViewById(R.id.description_productionCode);
         this.productionDate = this.findViewById(R.id.description_prod_date);
         this.addons = this.findViewById(R.id.description_addons);
+        this.imageView = this.findViewById(R.id.description_imageView);
 
         this.edit = this.findViewById(R.id.description_edit);
 
@@ -88,6 +98,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.location = new LocationFetchByIdAsyncTask().execute(this.game.locationId).get();
         this.authorEntity = new AuthorFetchByIdAsyncTask().execute(this.game.authorId).get();
         this.artistEntity = new ArtistFetchByIdAsyncTask().execute(this.game.artistId).get();
+        this.addonsEntities = new GameFetchAddonsAsyncTask().execute(this.game.gameId).get();
 
         this.title.setText(this.game.title);
         this.orginal.setText(this.game.orginalTitle);
@@ -113,7 +124,11 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.localization.setText(this.location.name);
         this.productionCode.setText(this.game.productionCode);
         this.productionDate.setText(this.game.productionDate);
-        this.addons.setText();
+        this.addons.setText(
+                this.addonsEntities.stream().map(el -> el.title).collect(Collectors.joining(" "))
+        );
+        Bitmap bmp = new DownloadImageTask().execute(this.game.imageURL).get();
+        imageView.setImageBitmap(bmp);
 
         this.edit.setOnClickListener(v -> {
             Intent intent1 = new Intent(GameDetailsActivity.this, GameEditActivity.class);

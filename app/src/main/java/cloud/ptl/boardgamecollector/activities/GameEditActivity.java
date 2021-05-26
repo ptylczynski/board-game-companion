@@ -121,6 +121,8 @@ public class GameEditActivity extends AppCompatActivity {
         this.authors = new AuthorFetchAsyncTask().execute().get();
         this.games = new GameFetchAsyncTask().execute().get();
 
+        if (this.games == null) this.games = new ArrayList<>();
+
         this.locationsString = this.locations.stream().map(el -> el.name).collect(Collectors.toList());
         this.artistsSring = this.artists.stream().map(el -> el.name + " " + el.surname).collect(Collectors.toList());
         this.authorsString = this.authors.stream().map(el -> el.name + " " + el.surname).collect(Collectors.toList());
@@ -334,9 +336,14 @@ public class GameEditActivity extends AppCompatActivity {
             game.locationId = this.locations.get(
                     this.location.getSelectedItemPosition()
             ).locationId;
-            game.addonToId = this.games.get(
-                    this.addonTo.getSelectedItemPosition()
-            ).gameId;
+            if (this.addonTo.getSelectedItemPosition() == -1)
+                game.addonToId = -1L;
+            if (!this.addon.isChecked())
+                game.addonToId = -1L;
+            else
+                game.addonToId = this.games.get(
+                        this.addonTo.getSelectedItemPosition()
+                ).gameId;
 
             if (this.mode.equals("create")){
                 if (this.games.stream().anyMatch(el -> el.title.equals(game.title))){
