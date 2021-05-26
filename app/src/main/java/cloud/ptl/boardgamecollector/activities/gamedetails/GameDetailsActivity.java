@@ -40,6 +40,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     private TextView artist;
     private TextView localization;
     private TextView productionCode;
+    private TextView productionDate;
 
     private FloatingActionButton edit;
 
@@ -71,6 +72,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.artist = this.findViewById(R.id.description_artist);
         this.localization = this.findViewById(R.id.description_localization);
         this.productionCode = this.findViewById(R.id.description_productionCode);
+        this.productionDate = this.findViewById(R.id.description_prod_date);
 
         this.edit = this.findViewById(R.id.description_edit);
 
@@ -105,6 +107,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         );
         this.localization.setText(this.location.name);
         this.productionCode.setText(this.game.productionCode);
+        this.productionDate.setText(this.game.productionDate);
 
         this.edit.setOnClickListener(v -> {
             Intent intent1 = new Intent(GameDetailsActivity.this, GameEditActivity.class);
