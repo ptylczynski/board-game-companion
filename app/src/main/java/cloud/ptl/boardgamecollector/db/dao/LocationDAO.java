@@ -5,8 +5,10 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 
+import cloud.ptl.boardgamecollector.db.entity.Location;
+
 @Dao
-public class LocationDAO {
+public interface LocationDAO {
     @Insert
     long add(Location location);
 
