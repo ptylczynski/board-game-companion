@@ -7,6 +7,17 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/copy_game_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/artist_float"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
