@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             Intent runNew = new Intent(MainActivity.this, ArtistActivity.class);
             MainActivity.this.startActivity(runNew);
         });
+
+
     }
 
     @SneakyThrows

@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -29,6 +31,7 @@ import cloud.ptl.boardgamecollector.io.db.ArtistFetchAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.AuthorAddAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.AuthorFetchAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameAddAsyncTask;
+import cloud.ptl.boardgamecollector.io.db.GameFetchAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.GameUpdateAsyncTask;
 import cloud.ptl.boardgamecollector.io.db.LocationFetchAsyncTask;
 import cloud.ptl.boardgamecollector.io.dto.GameDetailsDTO;
@@ -68,6 +71,8 @@ public class GameEditActivity extends AppCompatActivity {
     private List<String> locationsString;
     private ArrayAdapter<String> locationsAdapter;
 
+    private List<Game> games;
+
     private Intent intent;
     private Integer id;
 
@@ -105,6 +110,7 @@ public class GameEditActivity extends AppCompatActivity {
         this.locations = new LocationFetchAsyncTask().execute().get();
         this.artists = new ArtistFetchAsyncTask().execute().get();
         this.authors = new AuthorFetchAsyncTask().execute().get();
+        this.games = new GameFetchAsyncTask().execute().get();
 
         this.locationsString = this.locations.stream().map(el -> el.name).collect(Collectors.toList());
         this.artistsSring = this.artists.stream().map(el -> el.name + " " + el.surname).collect(Collectors.toList());
@@ -195,7 +201,7 @@ public class GameEditActivity extends AppCompatActivity {
 
         this.confirm.setOnClickListener(v -> {
 
-            if (!this.artists.contains(this.gameDetailsDTO.getArtists())){
+            if (!this.artists.contains(this.gameDetailsDTO.getArtists().get(0))){
                 try {
                     this.gameDetailsDTO.getArtists().get(0).artistId =
                             new ArtistAddAsyncTask().execute(
@@ -234,6 +240,7 @@ public class GameEditActivity extends AppCompatActivity {
             game.toCollectionAddDate = this.additionDate.getText().toString();
             game.orderDate = this.orderDate.getText().toString();
             game.description = this.description.getText().toString();
+            game.imageURL = this.gameDetailsDTO.getGame().imageURL;
             game.authorId = this.authors.get(
                     this.author.getSelectedItemPosition()
             ).authorId;
@@ -243,10 +250,19 @@ public class GameEditActivity extends AppCompatActivity {
             game.locationId = this.locations.get(
                     this.location.getSelectedItemPosition()
             ).locationId;
-            if (this.mode.equals("create"))
-                new GameAddAsyncTask().execute(game);
-            else
-                new GameUpdateAsyncTask().execute(game);
+            if (this.games.stream().anyMatch(el -> el.title.equals(game.title))){
+                Snackbar.make(
+                        this.findViewById(R.id.edit_confirm),
+                        "Gra już istnieje, nie dodano",
+                        Snackbar.LENGTH_SHORT
+                ).show();
+            }
+            else {
+                if (this.mode.equals("create"))
+                    new GameAddAsyncTask().execute(game);
+                else
+                    new GameUpdateAsyncTask().execute(game);
+            }
         });
     }
 }
