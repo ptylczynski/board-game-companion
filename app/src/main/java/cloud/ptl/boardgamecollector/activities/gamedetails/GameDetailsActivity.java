@@ -107,7 +107,7 @@ public class GameDetailsActivity extends AppCompatActivity {
             Intent intent1 = new Intent(GameDetailsActivity.this, GameEditActivity.class);
             intent.putExtra("mode", "edit");
             intent.putExtra("id", id);
-            startActivity(intent);
+            startActivity(intent1);
         });
     }
 }
