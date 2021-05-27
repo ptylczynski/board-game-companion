@@ -47,10 +47,12 @@ public class GameAdapter extends ArrayAdapter<Game> {
                     );
         TextView title = convertView.findViewById(R.id.tetxView_list_elem_title);
         TextView description = convertView.findViewById(R.id.textView_list_elem_description);
+        TextView date = convertView.findViewById(R.id.date);
         ImageView imageView = convertView.findViewById(R.id.imageView_thumbnail);
 
         title.setText(game.title);
         description.setText(game.description);
+        date.setText(game.productionDate);
         Bitmap bmp = new DownloadImageTask().execute(game.imageURL).get();
         imageView.setImageBitmap(bmp);
         return convertView;

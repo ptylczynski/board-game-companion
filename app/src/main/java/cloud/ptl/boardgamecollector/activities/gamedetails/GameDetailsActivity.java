@@ -125,7 +125,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         this.productionCode.setText(this.game.productionCode);
         this.productionDate.setText(this.game.productionDate);
         this.addons.setText(
-                this.addonsEntities.stream().map(el -> el.title).collect(Collectors.joining(" "))
+                this.addonsEntities.stream().map(el -> el.title).collect(Collectors.joining("\n"))
         );
         Bitmap bmp = new DownloadImageTask().execute(this.game.imageURL).get();
         imageView.setImageBitmap(bmp);

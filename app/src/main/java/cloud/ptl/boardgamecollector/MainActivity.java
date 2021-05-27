@@ -11,6 +11,8 @@ import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
+import java.text.Collator;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -36,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton authorFloat;
     private FloatingActionButton artistFloat;
     private FloatingActionButton copyCollection;
+    private FloatingActionButton sortDate;
+    private FloatingActionButton sortAlpha;
     private ListView gameList;
 
     private List<Game> games;
     private GameAdapter adapter;
+
+    private Boolean isSortingAlpha;
 
     @SneakyThrows
     @Override
@@ -50,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 this.getApplicationContext()
         );
 
+        this.isSortingAlpha = true;
+
         this.gameList = this.findViewById(R.id.game_list);
         this.games = new GameFetchAsyncTask().execute().get();
+        if (isSortingAlpha)
+            this.games.sort(Comparator.comparing(el -> el.title));
+        else
+            this.games.sort(Comparator.comparing(el -> el.productionDate));
         this.adapter = new GameAdapter(
                 this,
                 R.layout.activity_game_entry_view,
@@ -64,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         this.authorFloat = this.findViewById(R.id.author_float);
         this.artistFloat = this.findViewById(R.id.artist_float);
         this.copyCollection = this.findViewById(R.id.copy_game_list);
+        this.sortAlpha = this.findViewById(R.id.sort_alpha);
+        this.sortDate = this.findViewById(R.id.sort_date);
 
         this.copyCollection.setOnClickListener(v -> {
             Intent intent = new Intent(this, CopyActivity.class);
@@ -107,6 +121,20 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        this.sortDate.setOnClickListener(v -> {
+            this.isSortingAlpha = false;
+            this.games.sort(Comparator.comparing(el -> el.productionDate));
+            this.adapter.clear();
+            this.adapter.addAll(this.games);
+        });
+
+        this.sortAlpha.setOnClickListener(v -> {
+            this.isSortingAlpha = true;
+            this.games.sort(Comparator.comparing(el -> el.title));
+            this.adapter.clear();
+            this.adapter.addAll(this.games);
+        });
     }
 
     @SneakyThrows
@@ -115,9 +143,14 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (this.adapter != null){
             this.adapter.clear();
-            this.adapter.addAll(
-                    new GameFetchAsyncTask().execute().get()
-            );
+            this.games = new GameFetchAsyncTask()
+                    .execute()
+                    .get();
+            if (isSortingAlpha)
+                this.games.sort(Comparator.comparing(el -> el.title));
+            else
+                this.games.sort(Comparator.comparing(el -> el.productionDate));
+            this.adapter.addAll(games);
         }
 
     }

@@ -2,8 +2,10 @@ package cloud.ptl.boardgamecollector.activities.copycollection;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 import cloud.ptl.boardgamecollector.R;
+import cloud.ptl.boardgamecollector.activities.GameEditActivity;
 import cloud.ptl.boardgamecollector.io.dto.UserGamesDTO;
 import cloud.ptl.boardgamecollector.io.network.GameDetailsFetchAsyncTask;
 import cloud.ptl.boardgamecollector.io.network.UserGamesFetchAsyncTask;
@@ -54,11 +57,19 @@ public class CopyActivity extends AppCompatActivity {
             String username = this.name.getText().toString();
             try {
                 UserGamesDTO newGames = new UserGamesFetchAsyncTask().execute(username).get();
+                this.ids = newGames.getGamesID();
                 this.adapter.clear();
                 this.adapter.addAll(newGames.getNames());
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
+        });
+
+        this.listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(this, GameEditActivity.class);
+            intent.putExtra("id", this.ids.get(position));
+            intent.putExtra("mode", "create");
+            this.startActivity(intent);
         });
     }
 }
